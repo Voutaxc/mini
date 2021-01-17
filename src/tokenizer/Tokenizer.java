@@ -1,161 +1,141 @@
-package tokenizer;
+package miniplc0java.tokenizer;
 
-import error.CompilationError;
-import error.ErrorCode;
-import javafx.util.Pair;
-
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Scanner;
+import miniplc0java.error.TokenizeError;
+import miniplc0java.error.ErrorCode;
+import miniplc0java.util.Pos;
 
 public class Tokenizer {
 
-    // 如果没有初始化，那么就 readAll
-    private Boolean initialized;
-    // 指向下一个要读取的字符
-    Pair<Integer, Integer> ptr;
-    // 以行为基础的缓冲区
-    ArrayList<String> linesBuffer;
+    private StringIter it;
 
-    static Scanner scanner;
-
-    public Tokenizer() {
-        initialized = false;
-        ptr = new Pair<>(0, 0);
-        linesBuffer = new ArrayList<>();
+    public Tokenizer(StringIter it) {
+        this.it = it;
     }
 
-    public Pair<Optional<Token>, Optional<CompilationError>> NextToken() {
-        if (!initialized) {
-            readAll();
-        }
-        if (isEOF()) {
-            return new Pair<>(Optional.empty(), Optional.of(new CompilationError(ErrorCode.ErrEOF, 0, 0)));
-        }
-        Pair<Optional<Token>, Optional<CompilationError>> p = nextToken();
-        if (p.getValue().isPresent()) {
-            return p;
-        }
-        Token token = p.getKey().orElse(null);
-        if (token == null) {
-            return new Pair<>(Optional.empty(), Optional.of(new CompilationError(ErrorCode.ErrStreamError, 0, 0)));
-        }
-        CompilationError err = checkToken(token).orElse(null);
-        if (err != null) {
-            return new Pair<>(p.getKey(), Optional.of(err));
-        }
-        return new Pair<>(p.getKey(), Optional.empty());
-    }
+    // 这里本来是想实现 Iterator<Token> 的，但是 Iterator 不允许抛异常，于是就这样了
+    /**
+     * 获取下一个 Token
+     * 
+     * @return
+     * @throws TokenizeError 如果解析有异常则抛出
+     */
+    public Token nextToken() throws TokenizeError {
+        it.readAll();
 
-    public Pair<ArrayList<Token>, Optional<CompilationError>> AllTokens() {
-        ArrayList<Token> result = new ArrayList<>();
-        while (true) {
-            Pair<Optional<Token>, Optional<CompilationError>> p = NextToken();
-            if (p.getValue().isPresent()) {
-                if (p.getValue().get().getErr() == ErrorCode.ErrEOF) {
-                    return new Pair<>(result, Optional.empty());
-                } else {
-                    return new Pair<>(new ArrayList<>(), p.getValue());
-                }
-            }
-            if (p.getKey().isPresent()) {
-                result.add(p.getKey().get());
-            }
+        // 跳过之前的所有空白字符
+        skipSpaceCharacters();
+
+        if (it.isEOF()) {
+            return new Token(TokenType.EOF, "", it.currentPos(), it.currentPos());
+        }
+
+        char peek = it.peekChar();
+        if (Character.isDigit(peek)) {
+            return lexUInt();
+        } else if (Character.isAlphabetic(peek)) {
+            return lexIdentOrKeyword();
+        } else {
+            return lexOperatorOrUnknown();
         }
     }
 
-    public Pair<Optional<Token>, Optional<CompilationError>> nextToken() {
-//todo:
-        return new Pair<>(Optional.empty(), Optional.empty());
+    private Token lexUInt() throws TokenizeError {
+        // 请填空：
+        // 直到查看下一个字符不是数字为止:
+        // -- 前进一个字符，并存储这个字符
+        //
+        // 解析存储的字符串为无符号整数
+        // 解析成功则返回无符号整数类型的token，否则返回编译错误
+        //
+        // Token 的 Value 应填写数字的值
+        StringBuilder temp=new StringBuilder();
+        Pos startpos=it.currentPos();
+        while(Character.isDigit(it.peekChar()))
+        {
+            char ch=it.nextChar();
+            temp.append(ch);
+        }
+        Pos endpos=it.currentPos();
+        int val=Integer.valueOf(temp.toString());
+        return new Token(TokenType.Uint,val,startpos,endpos);
     }
 
+    private Token lexIdentOrKeyword() throws TokenizeError {
+        // 请填空：
+        // 直到查看下一个字符不是数字或字母为止:
+        // -- 前进一个字符，并存储这个字符
+        //
+        // 尝试将存储的字符串解释为关键字
+        // -- 如果是关键字，则返回关键字类型的 token
+        // -- 否则，返回标识符
+        //
+        // Token 的 Value 应填写标识符或关键字的字符串
+        StringBuilder temp=new StringBuilder();
+        Pos startpos=it.currentPos();
 
-    public Optional<CompilationError> checkToken(Token token) {
-        switch (token.getTokenType()) {
-            case IDENTIFIER: {
-                String val = token.getValueString();
-                if (Character.isDigit(val.charAt(0))) {
-                    return Optional.of(new CompilationError(ErrorCode.ErrInvalidIdentifier, token.getStartPos().getKey(),
-                            token.getStartPos().getValue()));
-                }
-                break;
-            }
+        while(Character.isAlphabetic(it.peekChar()))
+        {
+            char ch=it.nextChar();
+            temp.append(ch);
+        }
+        String val=temp.toString();
+        Pos endpos=it.currentPos();
+
+        switch (val) {
+            case "begin":
+                return new Token(TokenType.Begin,val,startpos,endpos);
+            case "end":
+                return new Token(TokenType.End,val,startpos,endpos);
+            case "const":
+                return new Token(TokenType.Const,val,startpos,endpos);
+
+            case "var":
+                return new Token(TokenType.Var,val,startpos,endpos);
+            case "print":
+                return new Token(TokenType.Print,val,startpos,endpos);
             default:
-                break;
+                return new Token(TokenType.Ident,val,startpos,endpos);
         }
-        return Optional.empty();
+
+
     }
 
-    // 从这里开始其实是一个基于行号的缓冲区的实现
-    // 为了简单起见，我们没有单独拿出一个类实现
-    // 核心思想和 C 的文件输入输出类似，就是一个 buffer 加一个指针，有三个细节
-    // 1.缓冲区包括 \n
-    // 2.指针始终指向下一个要读取的 char
-    // 3.行号和列号从 0 开始
+    private Token lexOperatorOrUnknown() throws TokenizeError {
+        switch (it.nextChar()) {
+            case '+':
+                return new Token(TokenType.Plus, '+', it.previousPos(), it.currentPos());
 
-    // 一次读入全部内容，并且替换所有换行为 \n
-    // 这样其实是不合理的，这里只是简单起见这么实现
-    public void readAll() {
-        if (initialized) {
-            return;
+            case '-':
+                return new Token(TokenType.Minus, '-', it.previousPos(), it.currentPos());
+
+            case '*':
+                return new Token(TokenType.Mult, '*', it.previousPos(), it.currentPos());
+
+            case '/':
+                return new Token(TokenType.Div, '/', it.previousPos(), it.currentPos());
+
+
+            case ';':
+                return new Token(TokenType.Semicolon, ';', it.previousPos(), it.currentPos());
+
+            case '=':
+                return new Token(TokenType.Equal, '=', it.previousPos(), it.currentPos());
+
+            case '(':
+                return new Token(TokenType.LParen, '(', it.previousPos(), it.currentPos());
+
+            case ')':
+                return  new Token(TokenType.RParen, ')', it.previousPos() ,it.currentPos());
+
+            default:
+                // 不认识这个输入，摸了
+                throw new TokenizeError(ErrorCode.InvalidInput, it.previousPos());
         }
-        while (scanner.hasNext()) {
-            linesBuffer.add(scanner.nextLine() + '\n');
-        }
-        //todo:check read \n?
-        initialized = true;
     }
 
-    // 一个简单的总结
-    // | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9  | 偏移
-    // | = | = | = | = | = | = | = | = | = | =  |
-    // | h | a | 1 | 9 | 2 | 6 | 0 | 8 | 1 | \n |（缓冲区第0行）
-    // | 7 | 1 | 1 | 4 | 5 | 1 | 4 |             （缓冲区第1行）
-    // 这里假设指针指向第一行的 \n，那么有
-    // nextPos() = (1, 0)
-    // currentPos() = (0, 9)
-    // previousPos() = (0, 8)
-    // nextChar() = '\n' 并且指针移动到 (1, 0)
-    // unreadLast() 指针移动到 (0, 8)
-    public Pair<Integer, Integer> nextPos() {
-        if (ptr.getKey() >= linesBuffer.size()) {
-            CompilationError.DieAndPrint("advance after EOF");
+    private void skipSpaceCharacters() {
+        while (!it.isEOF() && Character.isWhitespace(it.peekChar())) {
+            it.nextChar();
         }
-        if (ptr.getValue() == linesBuffer.get(ptr.getKey()).length() - 1) {
-            return new Pair<>(ptr.getKey() + 1, 0);
-        }
-        return new Pair<>(ptr.getKey(), ptr.getValue() + 1);
-    }
-
-    public Pair<Integer, Integer> currentPos() {
-        return ptr;
-    }
-
-    public Pair<Integer, Integer> previousPos() {
-        if (ptr.getKey() == 0 && ptr.getValue() == 0) {
-            CompilationError.DieAndPrint("previous position from beginning");
-        }
-        if (ptr.getValue() == 0) {
-            return new Pair<>(ptr.getKey() - 1, linesBuffer.get(ptr.getKey() - 1).length() - 1);
-        }
-        return new Pair<>(ptr.getKey(), ptr.getValue() - 1);
-    }
-
-    public Optional<Character> nextChar() {
-        if (isEOF()) {
-            return Optional.empty();
-        }
-        Character result = linesBuffer.get(ptr.getKey()).charAt(ptr.getValue());
-        ptr = nextPos();
-        return Optional.of(result);
-    }
-
-    public Boolean isEOF() {
-        return ptr.getKey() >= linesBuffer.size();
-    }
-
-    // Note: Is it evil to unread a buffer?
-    public void unreadLast() {
-        ptr = previousPos();
     }
 }
