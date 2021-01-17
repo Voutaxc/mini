@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -27,7 +26,7 @@ import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
 public class App {
-    public static void main(String[] args) throws CompileError, IOException {
+    public static void main(String[] args) throws CompileError {
         var argparse = buildArgparse();
         Namespace result;
         try {
@@ -39,6 +38,7 @@ public class App {
 
         var inputFileName = result.getString("input");
         var outputFileName = result.getString("output");
+
         InputStream input;
         if (inputFileName.equals("-")) {
             input = System.in;
@@ -93,30 +93,23 @@ public class App {
                 output.println(token.toString());
             }
         } else if (result.getBoolean("analyse")) {
-        
-
-            iter = new StringIter("fn getint() -> int{return 0;}fn getdouble() -> double{return 0.e0;}fn getchar() -> int{return 0;}fn putint(a:int) -> void{}fn putdouble(a:double) -> void{}fn putchar(a:int) -> void{}fn putstr(a:int) -> void{}fn putln() -> void{}");
-            tokenizer = new Tokenizer(iter);
-            var analyser = new Analyser(tokenizer);
-            for(int i = 0; i <= 7; i++)
-                analyser.analyseFunction();
-
-            scanner = new Scanner(input);
-            iter = new StringIter(scanner);
-            tokenizer = new Tokenizer(iter);
-            analyser.setTokenizer(tokenizer);
-
-        
+            // analyze
+            var analyzer = new Analyser(tokenizer);
+            List<Instruction> instructions;
             try {
-                analyser.analyseProgram();
+                instructions = analyzer.analyse();
             } catch (Exception e) {
-                System.exit(1);
+                // 遇到错误不输出，直接退出
+                System.err.println(e);
+                System.exit(0);
+                return;
             }
-        
-            var outPutter = new OutPutter(analyser);
-        
-            outPutter.getBinaryList();
-            outPutter.print(output);
+            for (Instruction instruction : instructions) {
+                output.println(instruction.toString());
+            }
+        } else {
+            System.err.println("Please specify either '--analyse' or '--tokenize'.");
+            System.exit(3);
         }
     }
 

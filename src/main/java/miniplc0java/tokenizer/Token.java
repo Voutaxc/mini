@@ -1,10 +1,9 @@
 package miniplc0java.tokenizer;
 
+import miniplc0java.error.TokenizeError;
 import miniplc0java.util.Pos;
 
 import java.util.Objects;
-
-import miniplc0java.symbol.DataType;
 
 public class Token {
     private TokenType tokenType;
@@ -79,20 +78,6 @@ public class Token {
 
     public void setEndPos(Pos endPos) {
         this.endPos = endPos;
-    }
-    //use before assertIsType()
-    public DataType getDataType(){
-        switch(value.toString()){
-        case "int":
-            return DataType.UINT;
-        case "double":
-            return DataType.DOUBLE;
-        case "void":
-            return DataType.VOID;
-        //should not reach here
-        default:
-            return DataType.NONE;
-        }
     }
 
     @Override

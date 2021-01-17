@@ -3,7 +3,7 @@ package miniplc0java.error;
 import miniplc0java.util.Pos;
 
 public class TokenizeError extends CompileError {
-
+    // auto-generated
     private static final long serialVersionUID = 1L;
 
     private ErrorCode err;
