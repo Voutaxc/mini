@@ -1,0 +1,81 @@
+package miniplc0java;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import miniplc0java.analyser.Analyser;
+import miniplc0java.error.CompileError;
+import miniplc0java.instruction.Instruction;
+import miniplc0java.tokenizer.StringIter;
+import miniplc0java.tokenizer.Token;
+import miniplc0java.tokenizer.TokenType;
+import miniplc0java.tokenizer.Tokenizer;
+
+import net.sourceforge.argparse4j.*;
+import net.sourceforge.argparse4j.impl.Arguments;
+import net.sourceforge.argparse4j.inf.ArgumentAction;
+import net.sourceforge.argparse4j.inf.ArgumentParser;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
+import net.sourceforge.argparse4j.inf.Namespace;
+
+public class App {
+    public static void main(String[] args) throws CompileError, IOException {
+
+        Scanner scanner;
+        InputStream input = new FileInputStream("input.txt");
+        PrintStream output = new PrintStream(new FileOutputStream("asm"));
+        
+
+        
+        var iter = new StringIter("fn getint() -> int{return 0;}fn getdouble() -> double{return 0.e0;}fn getchar() -> int{return 0;}fn putint(a:int) -> void{}fn putdouble(a:double) -> void{}fn putchar(a:int) -> void{}fn putstr(a:int) -> void{}fn putln() -> void{}");
+        var tokenizer = new Tokenizer(iter);
+        var analyser = new Analyser(tokenizer);
+        for(int i = 0; i <= 7; i++)
+            analyser.analyseFunction();
+
+        scanner = new Scanner(input);
+        iter = new StringIter(scanner);
+        tokenizer = new Tokenizer(iter);
+        analyser.setTokenizer(tokenizer);
+
+    
+        try {
+            analyser.analyseProgram();
+        } catch (Exception e) {
+            System.exit(1);
+        }
+    
+        var outPutter = new OutPutter(analyser);
+    
+        outPutter.getBinaryList();
+        outPutter.print(output);
+        /* tokenizer 
+        var tokens = new ArrayList<Token>();
+        try {
+            while (true) {
+                var token = tokenizer.nextToken();
+                if (token.getTokenType().equals(TokenType.EOF)) {
+                    break;
+                }
+                tokens.add(token);
+            }
+        } catch (Exception e) {
+            System.err.println(e);
+            System.exit(0);
+            return;
+        }
+        for (Token token : tokens) {
+            System.out.println(token.toString());
+        }
+        */
+
+	}
+}

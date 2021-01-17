@@ -1,0 +1,1288 @@
+##basic/wa1-1
+```
+fn main() {}
+```
+##basic/wa1-2
+```
+fn main() -> void {
+```
+##basic/wa1-3
+```
+fn main() -> void {
+    let i;
+}```
+##basic/wa2-ifff
+```
+fn main() -> void {
+    let i: int = 1;
+    if i > 1 {
+
+    } else {
+
+    } else {
+
+    }
+    return;
+}
+```
+##basic/wa3-assing
+```
+fn main() -> void {
+    let i: int;
+    let j: int;
+    i = j = 3;
+}
+```
+##basic/wa4-1
+```
+fn my_void_fn() -> void {
+    putint(1);
+}
+
+fn main() -> void {
+    let i: void;
+}
+```
+##basic/wa4-void
+```
+fn my_void_fn() -> void {
+    putint(1);
+}
+
+fn main() -> void {
+    let i: int;
+    i = my_void_fn();
+}
+```
+##basic/wa5-return 
+```
+fn main() -> int {
+    return;
+}
+```
+##basic/wa6-string
+```
+fn main() -> void {
+    putstr("this is a test
+```
+##basic/wa7-duplicate-function
+```
+fn foo() -> void {}
+fn foo() -> void {}
+fn main() -> void {}
+```
+##basic/wa8-const-stuff
+```
+const i = 1000;
+fn main() -> void {
+    putint(i);
+    i = 100;
+}
+```
+##basic/wa9-repeat-decl
+```
+fn main() -> void {
+    let i: int = 1;
+    let i: int = 2;
+}
+```
+##comment/wa1
+```
+fn main()         // Hi!
+          -> void // comment here
+// do you miss me?
+{
+    // let i: int = 65535;
+    let i: int = 0;
+    let j: int = 1;
+    putint(i+j); // this prints out i + j
+    // return 0;
+    // we should not return here
+// } // unfortunately there's no ending brace
+// so this should fail
+```
+##comment/wa2
+```
+fn main() -> void {
+    putstr("// this is not a comment
+}
+```
+##double/wa1-1
+```
+
+fn main() -> void {
+    let i: double = 1;
+}
+```
+##double/wa1-2
+```
+fn main() -> void {
+    let i: double = 1.0f;
+}
+```
+##double/wa1-3
+```
+fn main() -> void {
+    let i: double = 1.0e+-1;
+}
+```
+##double/wa2
+```
+fn foo() -> double {
+    return 1;
+}
+
+fn main() -> void {}
+```
+##scope-nesting/wa1
+
+```
+fn main() -> void {
+    {
+        let i: int = 10086;
+    }
+    putint(i);
+}
+```
+##declaration-plus/wa1
+```
+fn main() -> void {
+    let a1: int = 1;
+    putint(a2);
+
+    let a2: int = 3;
+}
+```
+##break-continue/wa1
+```
+fn main() -> int {
+    break;
+}
+```
+##break-continue/wa2
+```
+fn main() -> int {
+    continue;
+}
+```
+##return-check/wa1-if
+```
+fn main() -> int {
+    if 1 == 2 {
+        return 1234;
+    } else if 2 == 3 {
+        return 4567
+    }
+}
+```
+##return-check/wa2-while
+```
+fn main() -> int {
+    let i: int = getint();
+    while i > 0 {
+        if i / 2 == 0 {
+            return 2;
+        }
+    }
+}
+```
+##return-check/wa3
+```
+fn main() -> int {
+    let a: int = getint();
+    let b: int = getint();
+    if a > 0 {
+        if b > 0 {
+            while b > 0 {
+                b = b - 1;
+                if b == 3 {
+                    return 1;
+                }
+            }
+            if a == 2 {
+                return 3;
+            }
+        } else {
+            if a == 4 {
+                return 5;
+            }
+            return 6;
+        }
+    } else {
+        return -1;
+    }
+}
+```
+##basic/ac10-while-fantasy
+```
+let g: int;
+let h: int;
+let f: int;
+let e: int;
+
+fn EightWhile() -> int{
+  let a: int;
+  let b: int;
+  let c: int;
+  let d: int;
+  a = 5;
+  b = 6;
+  c = 7;
+  d = 10;
+  while (a < 20) {
+    a = a + 3;
+    while(b < 10){
+      b = b + 1;
+      while(c == 7){
+        c = c - 1;
+        while(d < 20){
+          d = d + 3;
+          while(e > 1){
+            e = e-1;
+            while(f > 2){
+              f = f -2;
+              while(g < 3){
+                g = g +10;
+                while(h < 10){
+                  h = h + 8;
+                }
+                h = h-1;
+              }
+              g = g- 8;
+            }
+            f = f + 1;
+          }
+          e = e + 1;
+        }
+        d = d - 1;
+      }
+      c = c + 1;
+    }
+    b = b - 2;
+  }
+  
+  return (a + (b + d) + c)-(e + d - g + h);
+}
+
+fn main() -> void {
+  g = 1;
+  h = 2;
+  e = 4;
+  f = 6;
+  putint(EightWhile());
+}
+```
+##basic/ac11-huge-function
+```
+let a0: int;
+let a1: int;
+let a2: int;
+let a3: int;
+let a4: int;
+let a5: int;
+let a6: int;
+let a7: int;
+let a8: int;
+let a9: int;
+let a10: int;
+let a11: int;
+let a12: int;
+let a13: int;
+let a14: int;
+let a15: int;
+let a16: int;
+let a17: int;
+let a18: int;
+let a19: int;
+let a20: int;
+let a21: int;
+let a22: int;
+let a23: int;
+let a24: int;
+let a25: int;
+let a26: int;
+let a27: int;
+let a28: int;
+let a29: int;
+let a30: int;
+let a31: int;
+
+let a32: int;
+let a33: int;
+let a34: int;
+let a35: int;
+let a36: int;
+let a37: int;
+let a38: int;
+let a39: int;
+
+fn testParam8(a0: int, a1: int, a2: int, a3: int,
+        a4: int, a5: int, a6: int, a7: int) -> int {
+    return a0 + a1 + a2 + a3 + a4 + a5 + a6 + a7;
+}
+
+fn testParam16(a0: int, a1: int, a2: int, a3: int,
+        a4: int, a5: int, a6: int, a7: int,
+        a8: int, a9: int, a10: int, a11: int,
+        a12: int, a13: int, a14: int, a15: int) -> int{
+    return a0 + a1 + a2 - a3 - a4 - a5 - a6 - a7 +
+            a8 + a9 + a10 + a11 + a12 + a13 + a14 + a15;
+}
+
+fn testParam32(a0: int, a1: int, a2: int, a3: int,
+        a4: int, a5: int, a6: int, a7: int,
+        a8: int, a9: int, a10: int, a11: int,
+        a12: int, a13: int, a14: int, a15: int,
+        a16: int, a17: int, a18: int, a19: int,
+        a20: int, a21: int, a22: int, a23: int,
+        a24: int, a25: int, a26: int, a27: int,
+        a28: int, a29: int, a30: int, a31: int) -> int {
+    return a0 + a1 + a2 + a3 + a4 + a5 + a6 + a7 +
+            a8 + a9 + a10 + a11 + a12 + a13 + a14 + a15 +
+            a16 + a17 - a18 - a19 - a20 - a21 - a22 + a23 +
+            a24 + a25 + a26 + a27 + a28 + a29 + a30 + a31;
+}
+
+fn main() -> void{
+    a0 = 0;
+    a1 = 1;
+    a2 = 2;
+    a3 = 3;
+    a4 = 4;
+    a5 = 5;
+    a6 = 6;
+    a7 = 7;
+    a8 = 8;
+    a9 = 9;
+    a10 = 0;
+    a11 = 1;
+    a12 = 2;
+    a13 = 3;
+    a14 = 4;
+    a15 = 5;
+    a16 = 6;
+    a17 = 7;
+    a18 = 8;
+    a19 = 9;
+    a20 = 0;
+    a21 = 1;
+    a22 = 2;
+    a23 = 3;
+    a24 = 4;
+    a25 = 5;
+    a26 = 6;
+    a27 = 7;
+    a28 = 8;
+    a29 = 9;
+    a30 = 0;
+    a31 = 1;
+
+    a32 = 4;
+    a33 = 5;
+    a34 = 6;
+    a35 = 7;
+    a36 = 8;
+    a37 = 9;
+    a38 = 0;
+    a39 = 1;
+
+    a0 = testParam8(a0, a1, a2, a3, a4, a5, a6, a7);
+    putint(a0); putln();
+    a0 = testParam16(a32, a33, a34, a35,
+            a36, a37, a38, a39,
+            a8, a9, a10, a11,
+            a12, a13, a14, a15);
+    putint(a0); putln();
+    a0 = testParam32(a0, a1, a2, a3,
+            a4, a5, a6, a7,
+            a8, a9, a10, a11,
+            a12, a13, a14, a15,
+            a16, a17, a18, a19,
+            a20, a21, a22, a23,
+            a24, a25, a26, a27,
+            a28, a29, a30, a31);
+    putint(a0); putln();
+}
+```
+##basic/ac2-1-christmas-tree
+```
+fn main() -> void {
+    let c: int = 0;
+    let i: int;
+    while c < 10 {
+        i = 0;
+        while i < 9 - c {
+            putchar(32);
+            i = i + 1;
+        }
+        i = 0;
+        while i < 2 * c + 1 {
+            putchar(42);
+            i = i + 1;
+        }
+        putln();
+        c = c + 1;
+    }
+}
+```
+##basic/ac2-2-hello-world
+```
+fn main() -> void {
+    putstr("=============\n| #  /\\ + \" |\n|  /:\"\"\'\\\\^||\n|/|\\?\"\'/\\  !|\n|\\r \\ #s    |\n|\\a /\\  /\\\\v|\n=============");
+}
+```
+##basic/ac2-hello-world
+```
+fn main() -> void {
+    putstr("Hello, world!");
+    putln();
+}
+```
+##basic/ac3-1-calc
+```
+fn add(a: int, b: int) -> int {
+    return a + b;
+}
+
+fn main() -> void {
+    let x: int;
+    let y: int;
+    let z: int;
+    x = getint();
+    y = getint();
+    z = add(x, y);
+    putint(z);
+}
+```
+##basic/ac3-calc
+```
+fn main() -> void {
+    let x: int = ----1;
+    let y: int = 2;
+    let z: int;
+    z = x + y;
+    putint(z);
+}
+```
+##basic/ac4-1-fastpow
+```
+fn is_odd(x: int) -> int {
+    return (x / 2 * 2) - x;
+}
+
+fn fastpow(base: int, exp: int) -> int {
+    let res: int = 1;
+    if exp < 0 {
+        return 0;
+    }
+    while exp > 0 {
+        if is_odd(exp) {
+            res = res * base;
+        }
+        base = base * base;
+        exp = exp / 2;
+    }
+    return res;
+}
+
+fn main() -> void {
+    let base: int;
+    let exp: int;
+    let count: int;
+    count = getint();
+    while count > 0 {
+        base = getint();
+        exp = getint();
+        putint(fastpow(base,exp));
+        putln();
+        count = count - 1;
+    }
+}
+```
+##basic/ac4-fib
+```
+fn fib(n: int) -> int {
+	if n < 0 { return -1; }
+	else if n == 0 { return 0; }
+	else if n == 1 { return 1; }
+	else { return fib(n-2) + fib(n-1); }
+}
+
+fn main() -> int {
+	let i: int = 0;
+	let max: int = 0;
+	max = getint();
+	if max > 20 { max = 21; }
+	else if max < 0 {
+		putint(-1);
+		return 0;
+	}
+	else {}
+	while i <= max {
+		putint(fib(i));
+        putln();
+		i = i+1;
+	}
+	return 0;
+}
+
+```
+##basic/ac5-iffff
+```
+fn main() -> void {
+    if 114514 {
+        if 1919810 {
+            if 1 != 2 {
+                if 3 == 3 {
+                    while 114 {
+                        while 514 {
+                            while 2 > -1 {
+                                while 1 < 19 {
+                                    while 3 >= 3 {
+                                        while 5 <= 5 {
+                                            if 0 {
+                                                while 1 {
+                                                    putint(1919);
+                                                }
+                                            } else {
+                                                putint(810);
+                                            }
+                                            return;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+##basic/ac6-gcd
+```
+fn gcd(a: int, b: int) -> int {
+    if a > b {
+        return gcd(b, a);
+    } else if a == 0 {
+        return b;
+    } else {
+        return gcd(b - a, a);
+    }
+}
+
+fn main() -> void {
+    let count: int;
+    let a: int;
+    let b: int;
+
+    count = getint();
+    while count > 0 {
+        a = getint();
+        b = getint();
+        putint(gcd(a, b));
+        putln();
+        count = count - 1;
+    }
+}
+```
+##basic/ac7-1-global
+```
+let i: int = 2;
+
+fn foo() -> int {
+    let i: int = 1;
+    putint(i);
+    putln();
+    return i;
+}
+
+fn bar() -> void {
+    putint(i);
+    putln();
+    i = i + 1;
+}
+
+fn main() -> void {
+    let i: int = 1;
+    putint(i);
+    putln();
+    putint(foo());
+    putln();
+    bar();
+    bar();
+    bar();
+    putint(foo());
+    putln();
+}
+```
+##basic/ac7-global
+```
+let a: int = 0;
+let b: int = 1;
+
+fn swap() -> void {
+    let temp: int = a;
+    a = b;
+    b = temp;
+}
+
+fn main() -> void {
+    a = getint();
+    b = getint();
+    
+    putint(a);
+    putchar(32);
+    putint(b);
+    putln();
+
+    swap();
+    
+    putint(a);
+    putchar(32);
+    putint(b);
+}
+```
+##basic/ac8-guess
+```
+fn main() -> void {
+    let needle: int;
+    let low: int = 0;
+    let high: int = 1024;
+    let mid: int;
+    needle = getint();
+    while low != high {
+        mid = (low + high + 1) / 2;
+        putint(mid);
+        putln();
+        if mid > needle {
+            high = mid;
+        } else if mid == needle {
+            low = mid;
+            high = mid;
+        } else {
+            low = mid;
+        }
+    }
+}
+```
+##-basic/ac9-hanoi
+```
+fn move(level: int, a: int, c: int) -> void {
+    putint(level);
+    putchar(32);
+    putchar(a);
+    putchar(32);
+    putchar(c);
+    putln();
+}
+
+fn hanoi(level: int, a: int, b: int, c: int) -> void {
+    if level == 1 {
+        move(level, a, c);
+    } else {
+        hanoi(level-1, a, c, b);
+        move(level, a, c);
+        hanoi(level-1, b, a, c);
+    }
+}
+
+fn main() -> void {
+    hanoi(6, 65, 66, 67);
+}
+```
+##comment/ac1
+```
+fn main()         // Hi!
+          -> void // comment here
+// do you miss me?
+{
+    // let i: int = 65535;
+    let i: int = 0;
+    let j: int = 1;
+    putint(i+j); // this prints out i + j
+    // return 0;
+    // we should not return here
+// } this is a fake end!
+} // this is real
+```
+##comment/ac2
+```
+fn main() -> void {
+    putstr("// this is not a comment");
+}
+```
+##char/ac1-atoi
+```
+fn is_digit(ch: int) -> int {
+    if ch < '0' {
+        return 0;
+    } else if ch > '9' {
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+fn is_space(ch: int) -> int {
+    if ch == ' ' {
+        return 1;
+    } else if ch == '\n' {
+        return 1;
+    } else if ch == '\r' {
+        return 1;
+    } else if ch == '\t' {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+fn atoi() -> int {
+    let c: int;
+    let res: int = 0;
+    let neg: int = 0;
+    c = getchar();
+    while is_space(c) {
+        c = getchar();
+    }
+    if c == '-' {
+        neg = 1;
+        c = getchar();
+    }
+    while is_digit(c) {
+        res = res * 10 + (c - '0');
+        c = getchar();
+    }
+    if neg {
+        res = -res;
+    }
+    return res;
+}
+
+fn main() -> void {
+    let count: int;
+    count = getint();
+    while count > 0 {
+        putint(atoi());
+        putln();
+        count = count - 1;
+    }
+}
+```
+##char/ac2-itoa
+```
+fn itoch(i: int) -> int {
+    if i < 10 {
+        return '0' + i;
+    } else {
+        return 'a' + i - 10;
+    }
+}
+
+fn modulo(a: int, b: int) -> int {
+    return a - a/b*b;
+}
+
+fn div_modulo(x: int, div_cnt: int, rhs: int) -> int {
+    while div_cnt > 0 {
+        x = x / rhs;
+        div_cnt = div_cnt - 1;
+    }
+    return modulo(x, rhs);
+}
+
+fn itoa(i: int, const radix: int) -> void {
+    let char_count: int = 0;
+    let ij: int;
+    if i < 0 {
+        i = -i;
+        putchar('-');
+    }
+
+    ij = i;
+    if ij == 0 {
+        char_count = 1;
+    } else {
+        while ij > 0 {
+            ij = ij / radix;
+            char_count = char_count + 1;
+        }
+    }
+    
+    while char_count > 0 {
+        char_count = char_count - 1;
+        putchar(itoch(div_modulo(i, char_count, radix)));
+    }
+}
+
+fn main() -> void {
+    let count: int;
+    let radix: int;
+    let number: int;
+    count = getint();
+    while count > 0 {
+        number = getint();
+        radix = getint();
+        itoa(number, radix);
+        putln();
+        count = count - 1;
+    }
+}
+```
+##double/ac1-simulate-anneal
+```
+const magic: int = 1000000009;
+const magic2: int = 1919839;
+const min_temp: double = 0.001;
+
+const f_low: double = -2.0;
+const f_high: double = 2.0;
+
+let state: int = 19260817;
+
+let x_old: double;
+let x_new: double;
+let s_old: double = 1926.0817;
+let s_new: double;
+
+let temp: double = 10000.0;
+
+fn f(x: double) -> double {
+    return 3.0 - (x * x);
+}
+
+fn random() -> double {
+    let result: int;
+    state = state + state * 8192;
+    state = state + state / 131072;
+    state = state + state * 32;
+    result = state / 65536;
+    if result < 0 {
+        result = -result;
+    }
+    return (result as double / 281474976710656 as double) ;
+}
+
+fn approx_exp(x: double) -> double {
+    let temp: double;
+    if x > 0.1 {
+        temp = approx_exp(x / 2.0);
+        return x * x;
+    } else if x < -0.1 {
+        temp = approx_exp(x / 2.0);
+        return x * x;
+    } else {
+        return ((x + 3.0) * (x + 3.0) + 3.0) / ((x - 3.0) * (x - 3.0) + 3.0);
+    }
+}
+
+fn judge(delta: double, temp: double) -> int {
+    if delta < 0.0 {
+        return 1;
+    } else {
+        if approx_exp(-delta / temp / 16.0) > random() {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+fn run_anneal() -> double {
+    let delta: double;
+    let delta_s: double;
+    let round: int = 0;
+    x_old = random() * (f_high - f_low) + f_low;
+    x_new = x_old;
+    s_old = f(x_old);
+    s_new = s_old;
+    while temp > 0.001 {
+        delta = (random() - 0.5) * 4.0;
+        x_new = x_old + delta;
+        if x_new > f_high {
+            x_new = x_new - 2.0 * delta;
+        } else if x_new < f_low {
+            x_new = x_new - 2.0 * delta;
+        }
+
+        s_new = f(x_new);
+
+        delta_s = s_old - s_new;
+
+        if judge(delta_s, temp) {
+            s_old = s_new;
+            x_old = x_new;
+        }
+
+        if delta_s < 0.0 {
+            temp = temp * 0.98;
+
+            putstr("round=");
+            putint(round);
+            putstr(" temp=");
+            putdouble(temp);
+            putstr(" value=");
+            putdouble(s_old);
+            putln();
+        }
+        round = round + 1;
+    }
+    return s_old;
+}
+
+fn main() -> void {
+    putdouble(run_anneal());
+}
+```
+##double/ac2-prime
+```
+fn sqrt(n: double) -> double {
+    let l: double = 0.0;
+    let r: double = n;
+    let mid: double;
+    let mid2: double;
+    while r-l > 0.000001 {
+        mid = (l+r) / 2.0;
+        mid2 = mid*mid;
+        if (mid2 == n) {
+            return mid;
+        }
+        if (mid2 < n) {
+            l = mid;
+        }
+        else {
+            r = mid;
+        }
+    }
+    return mid;
+}
+
+fn mod(i: int, j: int) -> int {
+    let k: int = (i/j) as double as int;
+    return (i - j*k) as double as int;
+}
+
+fn judge_mod(i: int, j: int, sq: int) -> int {
+   if j > sq {
+       return 0;
+   } else if mod(i, j) == 0 {
+       return 0;
+   } else {
+       return 1;
+   }
+}
+
+fn main() -> void {
+    let N: int;
+    let i: int;
+    let j: int;
+    let sq: int;
+    let sqd: double;
+    N = getint();
+    i = 2;
+    while i <= N {
+        if mod(i, 2) != 0 {
+            sqd = sqrt(i as double);
+            sq = sqrt(i as double) as int;
+            if (sqd as int != sq) {
+                putint(-1);
+                putln();
+                return;
+            }
+            j = 2;
+            while judge_mod(i, j, sq) {
+                j = j + 1;
+            }
+            if (j > sq) {
+                putint(i);
+                putln();
+            }
+        }
+        i = i + 1;
+    }
+}
+```
+##double/ac3-pi-and-e
+```
+fn calcPi() -> double {
+    let i: int = 1;
+    let rtv: double = 0.0;
+    let flag: int = -1;
+    while ((1.0 / i as double) > 1.0E-6) {
+        rtv = rtv + flag as double / i as double;
+        i = i + 2;
+        flag = -flag;
+    }
+    return rtv * 4.0;
+}
+
+fn calcE() -> double {
+    let rtv: double = 1.0;
+    let i: int = 1;
+    let j: double = 1.0;
+    while (i < 1000) {
+        j = j * i as double;
+        rtv = rtv + 1.0 / j;
+        i = i + 1;
+    }
+    return rtv;
+}
+
+fn main() -> void {
+    putdouble(calcPi());
+    putln();
+    putdouble(calcE());
+}
+```
+##scope-nesting/ac1
+```
+fn main() -> void {
+    let i: int = 1;
+    putint(i);
+    putln();
+    i = i + 1;
+    {
+        i = i + 1;
+        putint(i);
+        putln();
+        {
+            let i: int = 999;
+            putint(i);
+            putln();
+            i = i + 1;
+            {
+                putint(i);
+                putln();
+            }
+        }
+        putint(i);
+        putln();
+    }
+}
+```
+##scope-nesting/ac2
+```
+
+fn is_odd(x: int) -> int {
+    return (x / 2 * 2) - x;
+}
+
+fn fastpow(base: int, exp: int) -> int {
+    let res: int = 1;
+    if exp < 0 {
+        return 0;
+    }
+    while exp > 0 {
+        if is_odd(exp) {
+            res = res * base;
+        }
+        base = base * base;
+        exp = exp / 2;
+    }
+    return res;
+}
+
+fn main() -> void {
+    let count: int;
+    count = getint();
+    while count > 0 {
+        let base: int;
+        let exp: int;
+        base = getint();
+        exp = getint();
+        putint(fastpow(base,exp));
+        putln();
+        count = count - 1;
+    }
+}
+```
+##scope-nesting/ac8-guess
+```
+fn main() -> void {
+    let count: int;
+    count = getint();
+    while count > 0 {
+        let needle: int;
+        let low: int = 0;
+        let high: int = 1024;
+        let mid: int = -3;
+        needle = getint();
+        while low != high {
+            let mid: int = (low + high + 1) / 2;
+            putint(mid);
+            putln();
+            if mid > needle {
+                high = mid;
+            } else if mid == needle {
+                low = mid;
+                high = mid;
+            } else {
+                low = mid;
+            }
+        }
+        putln();
+        count = count - 1;
+    }
+}
+```
+##-declaration-plus/ac1
+```
+fn main() -> void {
+    let a1: int = 1;
+    let a2: int = 3;
+    putint(a2);
+    putln();
+
+    let a3: int = a1 + a2;
+    putint(a3);
+    putln();
+    putint(a2);
+    putln();
+}
+```
+##declaration-plus/ac2-gcd
+```
+fn gcd(a: int, b: int) -> int {
+    if a > b {
+        let temp: int = a;
+        a = b;
+        b = temp;
+    }
+    while a != 0 {
+        while a <= b {
+            b = b - a;
+        }
+        let temp1: int = b;
+        b = a;
+        a = temp1;
+    }
+    return b;
+}
+
+fn main() -> void {
+    let count: int;
+    let a: int;
+    let b: int;
+
+    count = getint();
+    while count > 0 {
+        a = getint();
+        b = getint();
+        putint(gcd(a, b));
+        putln();
+        count = count - 1;
+    }
+}
+```
+##break-continue/ac1-fastpow-v2
+```
+
+fn is_odd(x: int) -> int {
+    return (x / 2 * 2) - x;
+}
+
+fn fastpow(base: int, exp: int) -> int {
+    let res: int = 1;
+    if exp < 0 {
+        return 0;
+    }
+    while 1 {
+        if is_odd(exp) {
+            res = res * base;
+        }
+        base = base * base;
+        exp = exp / 2;
+        if exp == 0 {
+            break;
+        }
+    }
+    return res;
+}
+
+fn main() -> void {
+    let base: int;
+    let exp: int;
+    let count: int;
+    count = getint();
+    count = count * 4 + 1;
+    while 1 {
+        if is_odd(count){
+            count = count - 3;
+            continue;
+        } else if count < 0 {
+            break;
+        }
+        base = getint();
+        exp = getint();
+        putint(fastpow(base,exp));
+        putln();
+        count = count - 1;
+    }
+}
+```
+##break-continue/ac2-guess-v3
+```
+fn main() -> void {
+    let instruction: int;
+    let low: int;
+    let high: int;
+    let mid: int;
+    let count: int;
+    count = getint();
+    while count > 0 {
+        low = getint();
+        high = getint();
+        count = count - 1;
+        while 1 {
+            mid = (low + high + 1) / 2;
+            instruction = getint();
+            if instruction == 0 {
+                break;
+            } else if instruction == 1 {
+                high = mid;
+            } else if instruction == 2 {
+                low = mid;
+            } else {
+                putstr("Invalid instruction!");
+                putln();
+                continue;
+            }
+            if low == high {
+                putstr("You cheated!");
+                putln();
+                break;
+            }
+            putint(mid);
+            putln();
+        }
+        putint(mid);
+        putln();
+        putln();
+    }
+}
+```
+##break-continue/ac3
+```
+fn main() -> void {
+    let counter: int = 10;
+    while counter > 0 {
+        counter = counter - 1;
+        if counter == 8 {
+            counter = 4;
+            continue;
+        }
+        if counter == 0 {
+            break;
+        }
+        while 1 {
+            if counter > 0 {
+                putint(counter);
+                putln();
+                break;
+            }
+        }
+    }
+}
+```

@@ -1,0 +1,8 @@
+fn getint() -> int{return 0;}
+fn getdouble() -> double{return 0.e0;}
+fn getchar() -> int{return 0;}
+fn putint(a:int) -> void{}
+fn putdouble(a:double) -> void{}
+fn putchar(a:int) -> void{}
+fn putstr(a:int) -> void{}
+fn putln() -> void{}
